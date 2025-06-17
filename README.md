@@ -1,1 +1,2 @@
-# AgentC4Z4.github.io
+# Agent C4Z4
+# The CZ AI agent
