@@ -1,182 +1,200 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-        }
+/* Animated Background Container */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
 
-        /* Video Background */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            object-fit: cover;
-        }
+/* Dubai Skyline Silhouette */
+.skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, #000 0%, transparent 100%);
+    z-index: 3;
+}
 
-        /* Content overlay */
-        .content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding-top: 50px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+.building {
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, #000 0%, #1a1a1a 100%);
+    border-top: 2px solid #ff6b6b;
+}
 
-        h1 {
-            color: white;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
-            font-size: 3em;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
+.building::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 20px;
+    background: #ff6b6b;
+    box-shadow: 0 0 10px #ff6b6b;
+}
 
-        p {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            font-size: 1.2em;
-            margin-top: 30px;
-        }
+/* Matrix Rain Effect */
+.matrix-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
 
-        /* Custom Timer Styles */
-        .countdown-container {
-            background: rgba(0,0,0,0.7);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 30px auto;
-            border: 3px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 600px;
-        }
+.matrix-column {
+    position: absolute;
+    top: -100%;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 14px;
+    text-shadow: 0 0 5px #00ff41;
+    animation: matrix-fall linear infinite;
+}
 
-        .countdown-title {
-            color: white;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
+@keyframes matrix-fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
 
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+/* Russian-inspired Red Stars */
+.red-star {
+    position: absolute;
+    color: #ff0000;
+    font-size: 20px;
+    animation: twinkle 2s infinite alternate;
+    z-index: 2;
+}
 
-        .time-unit {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 20px;
-            min-width: 80px;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
 
-        .time-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #00ff88;
-            text-shadow: 0 0 10px rgba(0,255,136,0.5);
-            display: block;
-        }
+/* Glowing Grid Lines */
+.grid-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+    z-index: 0;
+}
 
-        .time-label {
-            font-size: 0.9em;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
+@keyframes grid-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
 
-        .target-date {
-            color: rgba(255,255,255,0.8);
-            font-size: 1em;
-            margin-top: 15px;
-            font-style: italic;
-        }
-    </style>
-</head>
-<body>
-    <!-- Video Background -->
-    <video class="video-background" autoplay muted loop>
-        <source src="timer.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+/* Content overlay */
+.content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding-top: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-    <!-- Content -->
-    <div class="content">
-        
-        
-        <div class="countdown-container">
-            <div class="countdown-title">Mission Countdown</div>
-            <div class="countdown-timer" id="countdown">
-                <div class="time-unit">
-                    <span class="time-number" id="days">00</span>
-                    <div class="time-label">Days</div>
-                </div>
-                <div class="time-unit">
-                    <span class="time-number" id="hours">00</span>
-                    <div class="time-label">Hours</div>
-                </div>
-                <div class="time-unit">
-                    <span class="time-number" id="minutes">00</span>
-                    <div class="time-label">Minutes</div>
-                </div>
-                <div class="time-unit">
-                    <span class="time-number" id="seconds">00</span>
-                    <div class="time-label">Seconds</div>
-                </div>
-            </div>
-            <div class="target-date">Target: June 19, 2025 - 09:00 UK Time</div>
-        </div>
+h1 {
+    color: #00ff41;
+    text-shadow: 0 0 20px #00ff41, 3px 3px 6px rgba(0,0,0,0.9);
+    font-size: 3em;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    animation: glow-pulse 2s infinite alternate;
+}
 
-        
-    </div>
+@keyframes glow-pulse {
+    0% { text-shadow: 0 0 20px #00ff41, 3px 3px 6px rgba(0,0,0,0.9); }
+    100% { text-shadow: 0 0 30px #00ff41, 0 0 40px #00ff41, 3px 3px 6px rgba(0,0,0,0.9); }
+}
 
-    <script>
-        // Set the target date (June 19, 2025 09:00 Athens time)
-        // Athens is UTC+2 (or UTC+3 during DST)
-        const targetDate = new Date('2025-06-19T09:00:00+03:00').getTime();
+p {
+    color: #ff6b6b;
+    text-shadow: 0 0 10px #ff6b6b, 2px 2px 4px rgba(0,0,0,0.8);
+    font-size: 1.2em;
+    margin-top: 30px;
+    font-family: 'Courier New', monospace;
+}
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+/* Custom Timer Styles */
+.countdown-container {
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 30px auto;
+    border: 3px solid #00ff41;
+    box-shadow: 0 0 30px rgba(0,255,65,0.3), 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+}
 
-            if (distance < 0) {
-                // Timer has expired
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                document.querySelector('.countdown-title').textContent = 'Mission Complete!';
-                return;
-            }
+.countdown-title {
+    color: #ff6b6b;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff6b6b;
+    font-family: 'Courier New', monospace;
+}
 
-            // Calculate time units
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
 
-            // Update the display with leading zeros
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
+.time-unit {
+    background: rgba(0,255,65,0.1);
+    border-radius: 15px;
+    padding: 20px;
+    min-width: 80px;
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 15px rgba(0,255,65,0.3);
+}
 
-        // Update countdown every second
-        updateCountdown(); // Initial call
-        setInterval(updateCountdown, 1000);
-    </script>
-</body>
-</html>
+.time-number {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00ff41;
+    text-shadow: 0 0 15px #00ff41;
+    display: block;
+    font-family: 'Courier New', monospace;
+}
+
+.time-label {
+    font-size: 0.9em;
+    color: #ff6b6b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.target-date {
+    color: rgba(255,255,255,0.8);
+    font-size: 1em;
+    margin-top: 15px;
+    font-style: italic;
+    font-family: 'Courier New', monospace;
+}
+</style>
