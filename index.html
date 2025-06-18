@@ -36,7 +36,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             z-index: -1;
         }
 
@@ -63,14 +63,14 @@
             50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
         }
 
-        /* Main Container */
+        /* Main Container - 20% Transparent */
         .timer-container {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
             border-radius: 30px;
             padding: 40px 30px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.15);
             text-align: center;
             max-width: 900px;
             width: 95%;
@@ -86,7 +86,7 @@
             margin-bottom: 30px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px #00ff88;
+            text-shadow: 0 0 20px #00ff88, 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         /* Digital Display Style Timer */
@@ -107,13 +107,13 @@
         }
 
         .digit-display {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
             padding: clamp(15px, 3vw, 25px);
             margin-bottom: 10px;
             box-shadow: 
-                inset 0 0 20px rgba(0, 0, 0, 0.8),
-                0 0 20px rgba(0, 255, 136, 0.3);
+                inset 0 0 20px rgba(0, 0, 0, 0.6),
+                0 0 20px rgba(0, 255, 136, 0.4);
             border: 2px solid #00ff88;
             width: 100%;
             min-height: 80px;
@@ -126,19 +126,19 @@
             font-family: 'Courier New', monospace;
             font-size: clamp(2rem, 6vw, 4rem);
             color: #00ff88;
-            text-shadow: 0 0 20px #00ff88;
+            text-shadow: 0 0 20px #00ff88, 2px 2px 4px rgba(0, 0, 0, 0.8);
             font-weight: bold;
             display: block;
             text-align: center;
         }
 
         .digit-label {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-size: clamp(0.8rem, 2.5vw, 1.2rem);
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         }
 
         /* Progress Bars */
@@ -147,13 +147,13 @@
         }
 
         .progress-bar {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             height: clamp(6px, 1.5vw, 10px);
             border-radius: 5px;
             margin: 10px 0;
             overflow: hidden;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .progress-fill {
@@ -165,30 +165,30 @@
         }
 
         .progress-label {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             font-size: clamp(0.7rem, 2vw, 1rem);
             margin-bottom: 5px;
             text-align: left;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
         }
 
         /* Target Info */
         .target-info {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             font-size: clamp(0.9rem, 2.5vw, 1.3rem);
             margin-top: 25px;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 15px;
             border: 1px solid rgba(0, 255, 136, 0.3);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
         }
 
         /* Pulse Animation */
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 136, 0.3); }
-            50% { transform: scale(1.05); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 136, 0.6); }
-            100% { transform: scale(1); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 136, 0.3); }
+            0% { transform: scale(1); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 136, 0.4); }
+            50% { transform: scale(1.05); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 136, 0.7); }
+            100% { transform: scale(1); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 255, 136, 0.4); }
         }
 
         .pulse {
@@ -271,7 +271,7 @@
 <body>
     <!-- Video Background -->
     <video class="video-background" autoplay muted loop playsinline>
-        <source src="timer.mp4" type="video/mp4">
+        <source src="timer2.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     
