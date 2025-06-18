@@ -1,168 +1,182 @@
 <!DOCTYPE html>
 <html>
 <head>
-    /* Video Background */
-    .video-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        object-fit: cover;
-    }
-
-    /* Content overlay */
-    .content {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        padding-top: 50px;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    h1 {
-        color: white;
-        text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
-        font-size: 3em;
-        margin-bottom: 30px;
-        font-weight: bold;
-    }
-
-    p {
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        font-size: 1.2em;
-        margin-top: 30px;
-    }
-
-    /* Custom Timer Styles */
-    .countdown-container {
-        background: rgba(0,0,0,0.7);
-        border-radius: 20px;
-        padding: 40px;
-        margin: 30px auto;
-        border: 3px solid rgba(255,255,255,0.3);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        max-width: 600px;
-    }
-
-    .countdown-title {
-        color: white;
-        font-size: 1.5em;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
-
-    .countdown-timer {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .time-unit {
-        background: rgba(255,255,255,0.1);
-        border-radius: 15px;
-        padding: 20px;
-        min-width: 80px;
-        border: 2px solid rgba(255,255,255,0.2);
-    }
-
-    .time-number {
-        font-size: 2.5em;
-        font-weight: bold;
-        color: #00ff88;
-        text-shadow: 0 0 10px rgba(0,255,136,0.5);
-        display: block;
-    }
-
-    .time-label {
-        font-size: 0.9em;
-        color: white;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-top: 5px;
-    }
-
-    .target-date {
-        color: rgba(255,255,255,0.8);
-        font-size: 1em;
-        margin-top: 15px;
-        font-style: italic;
-    }
-</style>
-</head>
-<body>
-    <!-- Content -->
-<div class="content">
-    <h1>AGENT c4z4</h1>
-    
-    <div class="countdown-container">
-        <div class="countdown-title">Mission Countdown</div>
-        <div class="countdown-timer" id="countdown">
-            <div class="time-unit">
-                <span class="time-number" id="days">00</span>
-                <div class="time-label">Days</div>
-            </div>
-            <div class="time-unit">
-                <span class="time-number" id="hours">00</span>
-                <div class="time-label">Hours</div>
-            </div>
-            <div class="time-unit">
-                <span class="time-number" id="minutes">00</span>
-                <div class="time-label">Minutes</div>
-            </div>
-            <div class="time-unit">
-                <span class="time-number" id="seconds">00</span>
-                <div class="time-label">Seconds</div>
-            </div>
-        </div>
-        <div class="target-date">Target: June 19, 2025 - 09:00 Athens Time</div>
-    </div>
-
-    <p>tHE cz AGENT.</p>
-</div>
-
-<script>
-    // Set the target date (June 19, 2025 09:00 Athens time)
-    // Athens is UTC+2 (or UTC+3 during DST)
-    const targetDate = new Date('2025-06-19T09:00:00+03:00').getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            // Timer has expired
-            document.getElementById('days').textContent = '00';
-            document.getElementById('hours').textContent = '00';
-            document.getElementById('minutes').textContent = '00';
-            document.getElementById('seconds').textContent = '00';
-            document.querySelector('.countdown-title').textContent = 'Mission Complete!';
-            return;
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
 
-        // Calculate time units
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
 
-        // Update the display with leading zeros
-        document.getElementById('days').textContent = days.toString().padStart(2, '0');
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
+        /* Content overlay */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-    // Update countdown every second
-    updateCountdown(); // Initial call
-    setInterval(updateCountdown, 1000);
-</script>
+        h1 {
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+            font-size: 3em;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        p {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-size: 1.2em;
+            margin-top: 30px;
+        }
+
+        /* Custom Timer Styles */
+        .countdown-container {
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px auto;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 600px;
+        }
+
+        .countdown-title {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 80px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .time-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.9em;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .target-date {
+            color: rgba(255,255,255,0.8);
+            font-size: 1em;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="timer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>AGENT c4z4</h1>
+        
+        <div class="countdown-container">
+            <div class="countdown-title">Mission Countdown</div>
+            <div class="countdown-timer" id="countdown">
+                <div class="time-unit">
+                    <span class="time-number" id="days">00</span>
+                    <div class="time-label">Days</div>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="hours">00</span>
+                    <div class="time-label">Hours</div>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="minutes">00</span>
+                    <div class="time-label">Minutes</div>
+                </div>
+                <div class="time-unit">
+                    <span class="time-number" id="seconds">00</span>
+                    <div class="time-label">Seconds</div>
+                </div>
+            </div>
+            <div class="target-date">Target: June 19, 2025 - 09:00 Athens Time</div>
+        </div>
+
+        <p>tHE cz AGENT.</p>
+    </div>
+
+    <script>
+        // Set the target date (June 19, 2025 09:00 Athens time)
+        // Athens is UTC+2 (or UTC+3 during DST)
+        const targetDate = new Date('2025-06-19T09:00:00+03:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                // Timer has expired
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.countdown-title').textContent = 'Mission Complete!';
+                return;
+            }
+
+            // Calculate time units
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update the display with leading zeros
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        updateCountdown(); // Initial call
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>
