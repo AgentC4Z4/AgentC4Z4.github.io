@@ -10,12 +10,34 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+
+        /* Dark overlay for better text readability */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
         }
 
         /* Animated Background Particles */
@@ -25,7 +47,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .particle {
@@ -36,60 +59,72 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
         }
 
         /* Main Container */
         .timer-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 60px 40px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             text-align: center;
-            max-width: 800px;
-            width: 90%;
+            max-width: 900px;
+            width: 95%;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
         }
 
         .title {
-            color: white;
-            font-size: 2.5em;
+            color: #00ff88;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             font-weight: 300;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             letter-spacing: 3px;
             text-transform: uppercase;
+            text-shadow: 0 0 20px #00ff88;
         }
 
         /* Digital Display Style Timer */
         .digital-timer {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 20px;
             margin: 40px 0;
-            flex-wrap: wrap;
+            justify-items: center;
         }
 
         .digit-group {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 150px;
         }
 
         .digit-display {
-            background: #1a1a1a;
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 15px;
-            padding: 20px;
+            padding: clamp(15px, 3vw, 25px);
             margin-bottom: 10px;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-            border: 2px solid #333;
-            min-width: 120px;
+            box-shadow: 
+                inset 0 0 20px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(0, 255, 136, 0.3);
+            border: 2px solid #00ff88;
+            width: 100%;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .digit-number {
             font-family: 'Courier New', monospace;
-            font-size: 3.5em;
+            font-size: clamp(2rem, 6vw, 4rem);
             color: #00ff88;
             text-shadow: 0 0 20px #00ff88;
             font-weight: bold;
@@ -98,86 +133,151 @@
         }
 
         .digit-label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem);
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         /* Progress Bars */
         .progress-container {
-            margin: 40px 0;
+            margin: 30px 0;
         }
 
         .progress-bar {
             background: rgba(255, 255, 255, 0.1);
-            height: 8px;
-            border-radius: 4px;
-            margin: 15px 0;
+            height: clamp(6px, 1.5vw, 10px);
+            border-radius: 5px;
+            margin: 10px 0;
             overflow: hidden;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #00ff88, #00ccff);
-            border-radius: 4px;
+            border-radius: 5px;
             transition: width 1s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
         }
 
         .progress-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(0.7rem, 2vw, 1rem);
             margin-bottom: 5px;
             text-align: left;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         /* Target Info */
         .target-info {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2em;
-            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+            margin-top: 25px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         /* Pulse Animation */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 136, 0.3); }
+            50% { transform: scale(1.05); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 136, 0.6); }
+            100% { transform: scale(1); box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 136, 0.3); }
         }
 
         .pulse {
             animation: pulse 2s infinite;
         }
 
-        /* Responsive */
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
+            .timer-container {
+                padding: 25px 20px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+            
             .digital-timer {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
+                margin: 25px 0;
             }
             
             .digit-display {
-                min-width: 80px;
-                padding: 15px;
+                min-height: 70px;
+                padding: 15px 10px;
             }
             
-            .digit-number {
-                font-size: 2.5em;
+            .progress-container {
+                margin: 20px 0;
+            }
+            
+            .target-info {
+                padding: 15px;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timer-container {
+                padding: 20px 15px;
+                width: 98%;
+            }
+            
+            .digital-timer {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .digit-display {
+                min-height: 60px;
+                padding: 12px 8px;
             }
             
             .title {
-                font-size: 2em;
+                margin-bottom: 20px;
+                letter-spacing: 2px;
+            }
+        }
+
+        /* Landscape mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .timer-container {
+                padding: 20px;
+                margin: 5px;
+            }
+            
+            .digital-timer {
+                grid-template-columns: repeat(4, 1fr);
+                margin: 20px 0;
+            }
+            
+            .title {
+                margin-bottom: 15px;
+            }
+            
+            .progress-container {
+                margin: 15px 0;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="timer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <!-- Dark overlay for better readability -->
+    <div class="video-overlay"></div>
+
     <!-- Animated Particles -->
     <div class="particles" id="particles"></div>
 
@@ -244,13 +344,14 @@
         // Create floating particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 20 : 40; // Fewer particles on mobile
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
                 // Random size and position
-                const size = Math.random() * 6 + 2;
+                const size = Math.random() * 4 + 2;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 particle.style.left = Math.random() * 100 + '%';
@@ -306,12 +407,21 @@
             document.getElementById('minutes-progress').style.width = minutesProgress + '%';
         }
 
+        // Handle window resize for responsive particles
+        function handleResize() {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            createParticles();
+        }
+
         // Initialize
         window.addEventListener('load', () => {
             createParticles();
             updateTimer();
             setInterval(updateTimer, 1000);
         });
+
+        window.addEventListener('resize', handleResize);
     </script>
 </body>
 </html>
